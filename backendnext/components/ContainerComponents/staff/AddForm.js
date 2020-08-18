@@ -1,7 +1,21 @@
 import React, { Component } from 'react'
+import {Send_Get_RestAPI} from '../../../Request/imw_request'
 
 export class AddForm extends Component {
-    render() {
+  static async getStaticProps(ctx) {
+    let res_listsv = Send_Get_RestAPI("http://localhost:3001/student/list");
+    let result_listsv = res_listsv.json();
+    let res_typescore = Send_Get_Rest("http://localhost:3001/score/typescore");
+    let result_typescore = res_typescore.json();
+  }
+  constructor(props){
+    super(props)
+  }
+  componentWillMount(){
+     
+  }
+    render()
+     {
         return (
             <div>
                  <div>
@@ -9,7 +23,7 @@ export class AddForm extends Component {
                 <div className="col-sm-12">
                   <div className="card-box">
                     <div className="card-head">
-                      <header>Basic Information</header>
+                      <header>Form Score</header>
                       <button
                         id="panel-button"
                         className="mdl-button mdl-js-button mdl-button--icon pull-right"
@@ -35,91 +49,6 @@ export class AddForm extends Component {
                       </ul>
                     </div>
                     <div className="card-body row">
-                      <div className="col-lg-6 p-t-20">
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                          <input
-                            className="mdl-textfield__input"
-                            type="text"
-                            id="txtFirstName"
-                          />
-                          <label className="mdl-textfield__label">
-                            First Name
-                          </label>
-                        </div>
-                      </div>
-                      <div className="col-lg-6 p-t-20">
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                          <input
-                            className="mdl-textfield__input"
-                            type="text"
-                            id="txtLasttName"
-                          />
-                          <label className="mdl-textfield__label">
-                            Last Name
-                          </label>
-                        </div>
-                      </div>
-                      <div className="col-lg-6 p-t-20">
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                          <input
-                            className="mdl-textfield__input"
-                            type="email"
-                            id="txtemail"
-                          />
-                          <label className="mdl-textfield__label">Email</label>
-                          <span className="mdl-textfield__error">
-                            Enter Valid Email Address!
-                          </span>
-                        </div>
-                      </div>
-                      <div className="col-lg-6 p-t-20">
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                          <input
-                            className="mdl-textfield__input"
-                            type="text"
-                            id="date"
-                          />
-                          <label className="mdl-textfield__label">
-                            Joining Date
-                          </label>
-                        </div>
-                      </div>
-                      <div className="col-lg-6 p-t-20">
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                          <input
-                            className="mdl-textfield__input"
-                            type="password"
-                            id="txtPwd"
-                          />
-                          <label className="mdl-textfield__label">
-                            Password
-                          </label>
-                        </div>
-                      </div>
-                      <div className="col-lg-6 p-t-20">
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                          <input
-                            className="mdl-textfield__input"
-                            type="password"
-                            id="txtConfirmPwd"
-                          />
-                          <label className="mdl-textfield__label">
-                            Confirm Password
-                          </label>
-                        </div>
-                      </div>
-                      <div className="col-lg-6 p-t-20">
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                          <input
-                            className="mdl-textfield__input"
-                            type="text"
-                            id="designation"
-                          />
-                          <label className="mdl-textfield__label">
-                            Designation
-                          </label>
-                        </div>
-                      </div>
                       <div className="col-lg-6 p-t-20">
                         <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
                           <input
@@ -168,6 +97,49 @@ export class AddForm extends Component {
                           <input
                             className="mdl-textfield__input"
                             type="text"
+                            id="list9"
+                            defaultValue
+                            readOnly
+                            tabIndex={-1}
+                          />
+                          <label
+                            htmlFor="list2"
+                            className="pull-right margin-0"
+                          >
+                            <i className="mdl-icon-toggle__label material-icons">
+                              keyboard_arrow_down
+                            </i>
+                          </label>
+                          <label
+                            htmlFor="list9"
+                            className="mdl-textfield__label"
+                          >
+                            Class
+                          </label>
+                          <ul
+                            data-mdl-for="list9"
+                            className="mdl-menu mdl-menu--bottom-left mdl-js-menu"
+                          >
+                            <li className="mdl-menu__item" data-val="DE">
+                              Library
+                            </li>
+                            <li className="mdl-menu__item" data-val="BY">
+                              Administration
+                            </li>
+                            <li className="mdl-menu__item" data-val="BY">
+                              Transport
+                            </li>
+                            <li className="mdl-menu__item" data-val="BY">
+                              Laboratory
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 p-t-20">
+                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                          <input
+                            className="mdl-textfield__input"
+                            type="text"
                             id="sample2"
                             defaultValue
                             readOnly
@@ -185,7 +157,7 @@ export class AddForm extends Component {
                             htmlFor="sample2"
                             className="mdl-textfield__label"
                           >
-                            Gender
+                          TypeScore
                           </label>
                           <ul
                             data-mdl-for="sample2"
@@ -217,42 +189,6 @@ export class AddForm extends Component {
                           <span className="mdl-textfield__error">
                             Number required!
                           </span>
-                        </div>
-                      </div>
-                      <div className="col-lg-6 p-t-20">
-                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                          <input
-                            className="mdl-textfield__input"
-                            type="text"
-                            id="dateOfBirth"
-                          />
-                          <label className="mdl-textfield__label">
-                            Birth Date
-                          </label>
-                        </div>
-                      </div>
-                      <div className="col-lg-12 p-t-20">
-                        <div className="mdl-textfield mdl-js-textfield txt-full-width">
-                          <textarea
-                            className="mdl-textfield__input"
-                            rows={4}
-                            id="text7"
-                            defaultValue={""}
-                          />
-                          <label
-                            className="mdl-textfield__label"
-                            htmlFor="text7"
-                          >
-                            Address
-                          </label>
-                        </div>
-                      </div>
-                      <div className="col-lg-12 p-t-20">
-                        <label className="control-label col-md-3">
-                          Upload Photo
-                        </label>
-                        <div className="col-md-12">
-                          <div id="id_dropzone" className="dropzone" />
                         </div>
                       </div>
                       <div className="col-lg-12 p-t-20">

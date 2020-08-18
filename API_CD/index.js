@@ -16,9 +16,13 @@ app.use(function (req, res, next) {
 const userRoute = require('./Controller/Users')
 const loginRoute = require('./Controller/Login')
 const staffRoute = require('./Controller/Staff')
+const scoreRoute = require('./controller/Score')
+const studentRoute = require('./controller/Student')
 app.use('/users', userRoute);
 app.use('/login',loginRoute);
 app.use('/staff',staffRoute);
+app.use('/score',scoreRoute);
+app.use('/student',studentRoute);
   
 //Lets set up our local server now.  
 const server = app.listen(process.env.PORT || 3001, function () {  
