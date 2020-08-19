@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const { poolPromise } = require('../Connection/db')
 
-router.get('/1', async (req, res) => {
+//phuogng thuc get ma
+router.get('/typescores', async (req, res) => {
     try {
         const pool = await poolPromise
         const result = await pool.request()
@@ -21,7 +22,7 @@ router.get('/1', async (req, res) => {
     }
 })
 
-router.get('/2', async (req, res) => {
+router.get('/departments', async (req, res) => {
     try {
         const pool = await poolPromise
         const result = await pool.request()

@@ -2,10 +2,12 @@ const _expressPackage = require("express");
 const _bodyParserPackage = require("body-parser");  
 //Initilize app with express web framework  
 const app = _expressPackage();  
+const cors = require("cors");
 //To parse result in json format  
 app.use(_bodyParserPackage.json()); 
 app.use(_bodyParserPackage.urlencoded({extended: true }));  
 // Connection string parameters.
+app.use(cors());
 app.use(function (req, res, next) {  
     res.header("Access-Control-Allow-Origin", "*");  
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");  
@@ -38,3 +40,4 @@ const server = app.listen(process.env.PORT || 3001, function () {
   
 //GET API  
 
+//cai 1 o dau vay

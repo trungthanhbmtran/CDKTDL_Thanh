@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import {Send_Get_RestAPI} from '../../../Request/imw_request'
 
 export class AddForm extends Component {
-  static async getStaticProps(ctx) {
-    let res_listsv = Send_Get_RestAPI("http://localhost:3001/student/list");
-    let result_listsv = res_listsv.json();
-    let res_typescore = Send_Get_Rest("http://localhost:3001/score/typescore");
-    let result_typescore = res_typescore.json();
+  static async getInitialProps(ctx) {
+    const res = await Send_Get_RestAPI('http://localhost:3001/staff')
+         const json = await res.json();
+         return {results : json , header: 'List Staff' };
   }
   constructor(props){
     super(props)
@@ -14,9 +13,13 @@ export class AddForm extends Component {
   }
   async GetlistDepartments(event){
    event.preventDefault()
-   let res = await Send_Get_RestAPI('http://localhost:3001/scrore/1')
+    const url = "http://localhost:3001/score/departments";
+    let res = await Send_Get_RestAPI(url)
     let data = await res.json();
-   console.log(data);
+    console.log(data[0].TENDONVI)
+    return <li className="mdl-menu__item" data-val="DE">data[0].TENDONVI</li>
+  
+    
   }
   async GetListBranches(){
     console.log("this is nganh")
@@ -98,18 +101,7 @@ export class AddForm extends Component {
                             className="mdl-menu mdl-menu--bottom-left mdl-js-menu"
                             onClick={this.GetlistDepartments}
                           >
-                            <li className="mdl-menu__item" data-val="DE">
-                              Library
-                            </li>
-                            <li className="mdl-menu__item" data-val="BY">
-                              Administration
-                            </li>
-                            <li className="mdl-menu__item" data-val="BY">
-                              Transport
-                            </li>
-                            <li className="mdl-menu__item" data-val="BY">
-                              Laboratory
-                            </li>
+                            
                           </ul>
                         </div>
                       </div>
