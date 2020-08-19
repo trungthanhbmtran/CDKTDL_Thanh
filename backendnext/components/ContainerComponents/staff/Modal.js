@@ -20,7 +20,6 @@ export class Modal extends Component {
     componentDidMount() {
       Promise.all([
         fetchPromised("http://backend/foo.txt", 500),
-        fetchPromised("Send_Get_RestAPI", 500),
         fetchPromised("http://backend/baz.txt", 500)
     ]).then((data) => {
         let [ foo, bar, baz ] = data

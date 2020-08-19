@@ -2,11 +2,30 @@ const express = require('express')
 const router = express.Router()
 const { poolPromise } = require('../Connection/db')
 
-router.get('/typescore', async (req, res) => {
+router.get('/1', async (req, res) => {
     try {
         const pool = await poolPromise
         const result = await pool.request()
             .query(`select * from QLSV_DM_LOAIDIEM `, function (err, profileset) {
+                if (err) {
+                    console.log(err)
+                }
+                else {
+                    var send_data = profileset.recordset;
+                    res.json(send_data);
+                }
+            })
+    } catch (err) {
+        res.status(500)
+        res.send(err.message)
+    }
+})
+
+router.get('/2', async (req, res) => {
+    try {
+        const pool = await poolPromise
+        const result = await pool.request()
+            .query(`select MADONVI,TENDONVI from HMR_DONVI `, function (err, profileset) {
                 if (err) {
                     console.log(err)
                 }

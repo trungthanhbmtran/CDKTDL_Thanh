@@ -10,10 +10,30 @@ export class AddForm extends Component {
   }
   constructor(props){
     super(props)
+    this.GetlistDepartments = this.GetlistDepartments.bind(this);
   }
-  componentWillMount(){
-     
+  async GetlistDepartments(event){
+   event.preventDefault()
+   let res = await Send_Get_RestAPI('http://localhost:3001/scrore/1')
+    let data = await res.json();
+   console.log(data);
   }
+  async GetListBranches(){
+    console.log("this is nganh")
+  }
+  async GetListClasses(){
+    console.log("this is classs")
+  }
+  async GetListSubjects(){
+    console.log("this is subject")
+  }
+  async GetListStudents(){
+    console.log("this is students")
+  }
+  async GetListTypeScore(){
+    console.log("this is typescore")
+  }
+  
     render()
      {
         return (
@@ -76,6 +96,51 @@ export class AddForm extends Component {
                           <ul
                             data-mdl-for="list2"
                             className="mdl-menu mdl-menu--bottom-left mdl-js-menu"
+                            onClick={this.GetlistDepartments}
+                          >
+                            <li className="mdl-menu__item" data-val="DE">
+                              Library
+                            </li>
+                            <li className="mdl-menu__item" data-val="BY">
+                              Administration
+                            </li>
+                            <li className="mdl-menu__item" data-val="BY">
+                              Transport
+                            </li>
+                            <li className="mdl-menu__item" data-val="BY">
+                              Laboratory
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 p-t-20">
+                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                          <input
+                            className="mdl-textfield__input"
+                            type="text"
+                            id="list10"
+                            defaultValue
+                            readOnly
+                            tabIndex={-1}
+                          />
+                          <label
+                            htmlFor="list2"
+                            className="pull-right margin-0"
+                          >
+                            <i className="mdl-icon-toggle__label material-icons">
+                              keyboard_arrow_down
+                            </i>
+                          </label>
+                          <label
+                            htmlFor="list10"
+                            className="mdl-textfield__label"
+                          >
+                            Brench
+                          </label>
+                          <ul
+                            data-mdl-for="list10"
+                            className="mdl-menu mdl-menu--bottom-left mdl-js-menu"
+                            onClick={this.GetListBranches}
                           >
                             <li className="mdl-menu__item" data-val="DE">
                               Library
@@ -119,6 +184,7 @@ export class AddForm extends Component {
                           <ul
                             data-mdl-for="list9"
                             className="mdl-menu mdl-menu--bottom-left mdl-js-menu"
+                            onClick={this.GetListClasses}
                           >
                             <li className="mdl-menu__item" data-val="DE">
                               Library
@@ -131,6 +197,44 @@ export class AddForm extends Component {
                             </li>
                             <li className="mdl-menu__item" data-val="BY">
                               Laboratory
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 p-t-20">
+                        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                          <input
+                            className="mdl-textfield__input"
+                            type="text"
+                            id="SelectBox5"
+                            defaultValue
+                            readOnly
+                            tabIndex={-1}
+                          />
+                          <label
+                            htmlFor="SelectBox5"
+                            className="pull-right margin-0"
+                          >
+                            <i className="mdl-icon-toggle__label material-icons">
+                              keyboard_arrow_down
+                            </i>
+                          </label>
+                          <label
+                            htmlFor="SelectBox5"
+                            className="mdl-textfield__label"
+                          >
+                            Subjects
+                          </label>
+                          <ul
+                            data-mdl-for="SelectBox5"
+                            className="mdl-menu mdl-menu--bottom-left mdl-js-menu"
+                            onClick={this.GetListSubjects}
+                          >
+                            <li className="mdl-menu__item" data-val="DE">
+                              Male
+                            </li>
+                            <li className="mdl-menu__item" data-val="BY">
+                              Female
                             </li>
                           </ul>
                         </div>
@@ -162,6 +266,7 @@ export class AddForm extends Component {
                           <ul
                             data-mdl-for="sample2"
                             className="mdl-menu mdl-menu--bottom-left mdl-js-menu"
+                            onClick={this.GetListTypeScore}
                           >
                             <li className="mdl-menu__item" data-val="DE">
                               Male
@@ -184,7 +289,7 @@ export class AddForm extends Component {
                             className="mdl-textfield__label"
                             htmlFor="text5"
                           >
-                            Mobile Number
+                            Score:
                           </label>
                           <span className="mdl-textfield__error">
                             Number required!
