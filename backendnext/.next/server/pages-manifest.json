@@ -2,6 +2,6 @@
   "/_document": "pages/_document.js",
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/staffs/staff": "pages/staffs/staff.js",
-  "/staffs/addstaff": "pages/staffs/addstaff.js"
+  "/staffs/addstaff": "pages/staffs/addstaff.js",
+  "/staffs/staff": "pages/staffs/staff.js"
 }
