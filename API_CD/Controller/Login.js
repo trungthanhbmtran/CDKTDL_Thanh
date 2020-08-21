@@ -6,14 +6,20 @@ const { poolPromise } = require('../Connection/db')
 
 router.post('/', async (req, res) => {
     try {
+        const {username,password} = req.body
         const pool = await poolPromise
         const result = await pool.request()
-        .query(`select UserName,Pass from HMR_Users where UserName='${req.body.username}' and Pass ='${req.body.password}' `, function (err, profileset) {
+        .query(`select UserName,Pass from HMR_Users where UserName='${username}' and Pass ='${password}' `, function (err, profileset) {
             if (err) {
                 console.log(err)
             }
             else {
                 const send_data = profileset.recordset;
+                const payload = {username};
+                const token = jwt.sign(payload, secretShh, {
+                    expiresIn: '1h'
+                  });
+                  res.cookie('token', token, { httpOnly: true }).sendStatus(200);
                 res.json(send_data);
             }
         })  

@@ -10,6 +10,9 @@ export class AddForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      departments :"",
+      brench :"",
+      class :"",
       ID_SV_MH: "",
       ID_Loaidiem: "",
       Sodiem: "",
@@ -24,6 +27,13 @@ export class AddForm extends Component {
         [event.target.id]: event.target.value,
       });
 }
+   RenderListType = () => {
+    return (
+      <>
+     
+      </>
+    )
+  }
   
   async GetlistDepartments(event) {
     event.preventDefault();
@@ -39,7 +49,7 @@ export class AddForm extends Component {
     let data = await res.json();
     return (
       <li className="mdl-menu__item" data-val="DE">
-        {" "}
+        {"abc "}
         Khoa
       </li>
     );
@@ -61,6 +71,9 @@ export class AddForm extends Component {
   }
   async handleSubmit(event) {
     event.preventDefault();
+    console.log(this.state.departments)
+    console.log(this.state.brench)
+    console.log(this.state.class)
     console.log(this.state.ID_SV_MH)
     console.log(this.state.ID_Loaidiem)
     console.log(this.state.Sodiem)
@@ -102,175 +115,77 @@ export class AddForm extends Component {
                 <div className="card-body row">
                   <div className="col-lg-6 p-t-20">
                     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                      <input
-                        className="mdl-textfield__input"
-                        type="text"
-                        id="list2"
-                        defaultValue
-                        readOnly
-                        tabIndex={-1}
-                      />
-                      <label htmlFor="list2" className="pull-right margin-0">
-                        <i className="mdl-icon-toggle__label material-icons">
-                          keyboard_arrow_down
-                        </i>
-                      </label>
-                      <label htmlFor="list2" className="mdl-textfield__label">
+                    <label
+                        htmlFor="SelectBox1"
+                        className="mdl-textfield__label"
+                      >
                         Department
                       </label>
-                      <ul
-                        data-mdl-for="list2"
-                        className="mdl-menu mdl-menu--bottom-left mdl-js-menu"
-                      >
-                        {this.RenderListTest}
-                      </ul>
+                    <select id="departments" onChange={this.handleChange} value={this.state.departments}   className="mdl-textfield__input">
+                        <option value="khoa1">1</option>
+                        <option value="khoa2">2</option>
+                        <option value="khoa3">3</option>
+                   </select>
                     </div>
                   </div>
                   <div className="col-lg-6 p-t-20">
                     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                      <input
-                        className="mdl-textfield__input"
-                        type="text"
-                        id="list10"
-                        defaultValue
-                        readOnly
-                        tabIndex={-1}
-                      />
-                      <label htmlFor="list2" className="pull-right margin-0">
-                        <i className="mdl-icon-toggle__label material-icons">
-                          keyboard_arrow_down
-                        </i>
-                      </label>
-                      <label htmlFor="list10" className="mdl-textfield__label">
-                        Brench
-                      </label>
-                      <ul
-                        data-mdl-for="list10"
-                        className="mdl-menu mdl-menu--bottom-left mdl-js-menu"
-                        onClick={this.GetListBranches}
+                    <label
+                        htmlFor="SelectBox2"
+                        className="mdl-textfield__label"
                       >
-                        <li className="mdl-menu__item" data-val="DE">
-                          Library
-                        </li>
-                        <li className="mdl-menu__item" data-val="BY">
-                          Administration
-                        </li>
-                        <li className="mdl-menu__item" data-val="BY">
-                          Transport
-                        </li>
-                        <li className="mdl-menu__item" data-val="BY">
-                          Laboratory
-                        </li>
-                      </ul>
+                        Brenches
+                      </label>
+                    <select id="brench" onChange={this.handleChange} value={this.state.brench}   className="mdl-textfield__input">
+                        <option value="khoa1">1</option>
+                        <option value="khoa2">2</option>
+                        <option value="khoa3">3</option>
+                   </select>
                     </div>
                   </div>
                   <div className="col-lg-6 p-t-20">
                     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                      <input
-                        className="mdl-textfield__input"
-                        type="text"
-                        id="list9"
-                        defaultValue
-                        readOnly
-                        tabIndex={-1}
-                      />
-                      <label htmlFor="list2" className="pull-right margin-0">
-                        <i className="mdl-icon-toggle__label material-icons">
-                          keyboard_arrow_down
-                        </i>
-                      </label>
-                      <label htmlFor="list9" className="mdl-textfield__label">
-                        Class
-                      </label>
-                      <ul
-                        data-mdl-for="list9"
-                        className="mdl-menu mdl-menu--bottom-left mdl-js-menu"
-                        onClick={this.GetListClasses}
+                    <label
+                        htmlFor="SelectBox3"
+                        className="mdl-textfield__label"
                       >
-                        <li className="mdl-menu__item" data-val="DE">
-                          Library
-                        </li>
-                        <li className="mdl-menu__item" data-val="BY">
-                          Administration
-                        </li>
-                        <li className="mdl-menu__item" data-val="BY">
-                          Transport
-                        </li>
-                        <li className="mdl-menu__item" data-val="BY">
-                          Laboratory
-                        </li>
-                      </ul>
+                        Classes
+                      </label>
+                    <select id="class" onChange={this.handleChange} value={this.state.class}   className="mdl-textfield__input">
+                        <option value="khoa1">1</option>
+                        <option value="khoa2">2</option>
+                        <option value="khoa3">3</option>
+                   </select>
                     </div>
                   </div>
                   <div className="col-lg-6 p-t-20">
                     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                      <input
-                        className="mdl-textfield__input"
-                        type="text"
-                        id="SelectBox5"
-                        defaultValue
-                        readOnly
-                        tabIndex={-1}
-                      />
-                      <label
-                        htmlFor="SelectBox5"
-                        className="pull-right margin-0"
-                      >
-                        <i className="mdl-icon-toggle__label material-icons">
-                          keyboard_arrow_down
-                        </i>
-                      </label>
-                      <label
+                    <label
                         htmlFor="SelectBox5"
                         className="mdl-textfield__label"
                       >
                         Subjects
                       </label>
-                      <ul
-                        data-mdl-for="SelectBox5"
-                        className="mdl-menu mdl-menu--bottom-left mdl-js-menu"
-                        onClick={this.GetListSubjects}
-                      >
-                        <li className="mdl-menu__item" data-val="DE">
-                          Male
-                        </li>
-                        <li className="mdl-menu__item" data-val="BY">
-                          Female
-                        </li>
-                      </ul>
+                    <select id="ID_SV_MH" onChange={this.handleChange} value={this.state.ID_SV_MH}   className="mdl-textfield__input">
+                        <option value="khoa1">1</option>
+                        <option value="khoa2">2</option>
+                        <option value="khoa3">3</option>
+                   </select>
                     </div>
                   </div>
                   <div className="col-lg-6 p-t-20">
                     <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                      <input
-                        className="mdl-textfield__input"
-                        type="text"
-                        id="Loaidiem"
-                        value={this.state.ID_Loaidiem}
-                        onChange={this.handleChange}
-                        defaultValue
-                        readOnly
-                        tabIndex={-1}
-                      />
-                      <label htmlFor="Loaidiem" className="pull-right margin-0">
-                        <i className="mdl-icon-toggle__label material-icons">
-                          keyboard_arrow_down
-                        </i>
-                      </label>
-                      <label htmlFor="Loaidiem" className="mdl-textfield__label">
-                        TypeScore
-                      </label>
-                      <ul
-                        data-mdl-for="Loaidiem"
-                        className="mdl-menu mdl-menu--bottom-left mdl-js-menu"
+                    <label
+                        htmlFor="SelectBox5"
+                        className="mdl-textfield__label"
                       >
-                        <li className="mdl-menu__item" data-val="DE">
-                          Male
-                        </li>
-                        <li className="mdl-menu__item" data-val="BY">
-                          Female
-                        </li>
-                      </ul>
+                        TypeCore
+                      </label>
+                    <select id="ID_Loaidiem" onChange={this.handleChange} value={this.state.ID_Loaidiem}   className="mdl-textfield__input">
+                        <option value="select">kt1</option>
+                        <option value="Java">kt2</option>
+                        <option value="C++">C++</option>
+                   </select>
                     </div>
                   </div>
                   <div className="col-lg-6 p-t-20">

@@ -1,13 +1,21 @@
+
 const _expressPackage = require("express");  
-const _bodyParserPackage = require("body-parser");  
 //Initilize app with express web framework  
-const app = _expressPackage();  
+const app = _expressPackage(); 
+const _bodyParserPackage = require("body-parser");  
 const cors = require("cors");
+const userRoute = require('./Controller/Users')
+const loginRoute = require('./Controller/Login')
+const staffRoute = require('./Controller/Staff')
+const scoreRoute = require('./controller/Score')
+const studentRoute = require('./controller/Student')
 //To parse result in json format  
+const cookieParser = require("cookie-parser");
 app.use(_bodyParserPackage.json()); 
 app.use(_bodyParserPackage.urlencoded({extended: true }));  
 // Connection string parameters.
 app.use(cors());
+app.use(cookieParser());
 app.use(function (req, res, next) {  
     res.header("Access-Control-Allow-Origin", "*");  
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");  
@@ -15,11 +23,6 @@ app.use(function (req, res, next) {
     next();  
 });  
 //middware require router
-const userRoute = require('./Controller/Users')
-const loginRoute = require('./Controller/Login')
-const staffRoute = require('./Controller/Staff')
-const scoreRoute = require('./controller/Score')
-const studentRoute = require('./controller/Student')
 app.use('/users', userRoute);
 app.use('/login',loginRoute);
 app.use('/staff',staffRoute);
