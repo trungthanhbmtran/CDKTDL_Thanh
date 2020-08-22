@@ -117,6 +117,7 @@ export class AddForm extends Component {
   
   async handleSubmit(event) {
     event.preventDefault();
+    console.log(this.state)
     console.log(this.state.departments)
     console.log(this.state.brench)
     console.log(this.state.class)
@@ -220,7 +221,7 @@ export class AddForm extends Component {
                       >
                         Students
                       </label>
-                    <select id="students" onChange={this.handleChange} value={this.state.students}   className="mdl-textfield__input">
+                    <select id="ID_SV_MH" onChange={this.handleChange} value={this.state.ID_SV_MH}   className="mdl-textfield__input">
                        {this.RenderListStudents()}
                    </select>
                     </div>
