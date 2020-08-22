@@ -3,5 +3,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/staffs/addstaff": "pages/staffs/addstaff.js",
+  "/login": "pages/login.js",
   "/staffs/staff": "pages/staffs/staff.js"
 }

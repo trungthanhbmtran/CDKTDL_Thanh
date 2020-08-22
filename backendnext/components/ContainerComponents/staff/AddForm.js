@@ -1,74 +1,120 @@
 import React, { Component } from "react";
 import { Send_Get_RestAPI } from "../../../Request/imw_request";
+import _ from 'lodash';
 
 export class AddForm extends Component {
-  static async getInitialProps(ctx) {
-    const res = await Send_Get_RestAPI("http://localhost:3001/staff");
-    const json = await res.json();
-    return { results: json, header: "List Staff" };
-  }
   constructor(props) {
     super(props);
     this.state = {
-      departments :"",
-      brench :"",
-      class :"",
-      ID_SV_MH: "",
+      departments : 1004,
+      brench : 4,
+      class : 2006,
+      subjects : 1088,
+      ID_SV_MH: 1088,
       ID_Loaidiem: "",
       Sodiem: "",
       Ghichu: "",
     };
+
     this.handleChange = this.handleChange.bind(this);
-    this.GetlistDepartments = this.GetlistDepartments.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
     this.setState({
         [event.target.id]: event.target.value,
       });
-}
-   RenderListType = () => {
-    return (
-      <>
-     
-      </>
-    )
-  }
-  
-  async GetlistDepartments(event) {
-    event.preventDefault();
-    const url = "http://localhost:3001/score/departments";
-    let res = await Send_Get_RestAPI(url);
-    let data = await res.json();
-    console.log("get Department");
   }
 
-  RenderListTest = async () => {
-    const url = "http://localhost:3001/score/departments";
-    let res = await Send_Get_RestAPI(url);
-    let data = await res.json();
-    return (
-      <li className="mdl-menu__item" data-val="DE">
-        {"abc "}
-        Khoa
-      </li>
-    );
-  };
-  async GetListBranches() {
-    console.log("this is nganh");
+  RenderListDepartMents() {
+    return  this.props.results_departments.map((value) => {
+      const {TENDONVI,ID_Donvi} = value;
+      return (
+      <option value={ID_Donvi} key={ID_Donvi}>{TENDONVI}</option>
+      )
+    })
   }
-  async GetListClasses() {
-    console.log("this is classs");
+  RenderListBrench() {
+    /*return  this.props.results_classes.map((value) => {
+      const {Id_Nganhnghe,Ten_Nganhnghe} = value;
+        return (
+        <option value={Id_Nganhnghe} key={Id_Nganhnghe}>{Ten_Nganhnghe}</option>
+        )
+    })*/
+
+    console.log(JSON.stringify(this.state));
+
+    return _.filter(this.props.results_brenches, { 'ID_Donvi': parseInt(this.state.departments) }).map((value) =>  {
+      const {ID_Nganhnghe,Ten_Nganhnghe}= value;
+        return (
+          <option value={ID_Nganhnghe} key={ID_Nganhnghe}>{Ten_Nganhnghe}</option>
+        )
+    })
   }
-  async GetListSubjects() {
-    console.log("this is subject");
+  RenderListClasses() {
+    console.log(this.state.brench)
+    return _.filter(this.props.results_classes, { 'ID_Nganhnghe' : parseInt(this.state.brench) }).map((value) =>  {
+      const {ID_Lophoc,Ten_Lophoc} = value;
+        return (
+          <option value={ID_Lophoc} key={ID_Lophoc}>{Ten_Lophoc}</option>
+        )
+    })
   }
-  async GetListStudents() {
-    console.log("this is students");
+
+  RenderListSubjects() {
+    /*return  this.props.results_classes.map((value) => {
+      const {ID_Lophoc,Ten_Lophoc} = value;
+        return (
+        <option value={ID_Lophoc} key={ID_Lophoc}>{Ten_Lophoc}</option>
+        )
+    })*/
+    return _.filter(this.props.results_subjects, {'ID_Lophoc':parseInt(this.state.class)  }).map((value) =>  {
+      const {ID_Mon_Lophoc,ID_Lophoc,Ten_Monhoc} = value;
+        return (
+          <option value={ID_Mon_Lophoc} key={ID_Mon_Lophoc}>{Ten_Monhoc}</option>
+        )
+    })
   }
-  async GetListTypeScore() {
-    console.log("this is typescore");
+  RenderListSubjects() {
+    /*return  this.props.results_classes.map((value) => {
+      const {ID_Lophoc,Ten_Lophoc} = value;
+        return (
+        <option value={ID_Lophoc} key={ID_Lophoc}>{Ten_Lophoc}</option>
+        )
+    })*/
+    return _.filter(this.props.results_subjects, { 'ID_Lophoc':parseInt(this.state.class) }).map((value) =>  {
+      const {ID_Mon_Lophoc,ID_Lophoc,Ten_Monhoc,} = value;
+        return (
+          <option value={ID_Mon_Lophoc} key={ID_Mon_Lophoc}>{Ten_Monhoc}</option>
+        )
+    })
   }
+
+  RenderListStudents() {
+    /*return  this.props.results_classes.map((value) => {
+      const {ID_Lophoc,Ten_Lophoc} = value;
+        return (
+        <option value={ID_Lophoc} key={ID_Lophoc}>{Ten_Lophoc}</option>
+        )
+    })*/
+    return _.filter(this.props.results_students, {'ID_Mon_Lophoc' : parseInt(this.state.subjects)  }).map((value) =>  {
+      const {ID_Sinhvien,ID_SV_MH,HOTEN,ID_Mon_Lophoc} = value;
+        return (
+          <option value={ID_SV_MH} key={ID_SV_MH}>{HOTEN}</option>
+        )
+    })
+  }
+
+  RenderListTypeScores() {
+    return  this.props.results_typescores.map((value,index) => {
+      const {ID_LoaiDiem,Ten_LoaiDiem} = value;
+      return (
+      <option value={ID_LoaiDiem} key={ID_LoaiDiem}>{Ten_LoaiDiem}</option>
+      )
+    })
+  }
+
+
+  
   async handleSubmit(event) {
     event.preventDefault();
     console.log(this.state.departments)
@@ -80,6 +126,7 @@ export class AddForm extends Component {
     console.log(this.state.Ghichu)
   }
   render() {
+    console.log(this.props)
     return (
       <div>
         <div>
@@ -114,22 +161,20 @@ export class AddForm extends Component {
                 </div>
                 <div className="card-body row">
                   <div className="col-lg-6 p-t-20">
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  getmdl-select__fix-height txt-full-width">
                     <label
                         htmlFor="SelectBox1"
                         className="mdl-textfield__label"
                       >
                         Department
                       </label>
-                    <select id="departments" onChange={this.handleChange} value={this.state.departments}   className="mdl-textfield__input">
-                        <option value="khoa1">1</option>
-                        <option value="khoa2">2</option>
-                        <option value="khoa3">3</option>
-                   </select>
+                      <select id="departments" onChange={this.handleChange} value={this.state.departments}   className="mdl-textfield__input">
+                        {this.RenderListDepartMents()}
+                      </select>
                     </div>
                   </div>
                   <div className="col-lg-6 p-t-20">
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  getmdl-select__fix-height txt-full-width">
                     <label
                         htmlFor="SelectBox2"
                         className="mdl-textfield__label"
@@ -137,14 +182,12 @@ export class AddForm extends Component {
                         Brenches
                       </label>
                     <select id="brench" onChange={this.handleChange} value={this.state.brench}   className="mdl-textfield__input">
-                        <option value="khoa1">1</option>
-                        <option value="khoa2">2</option>
-                        <option value="khoa3">3</option>
+                       {this.RenderListBrench()}
                    </select>
                     </div>
                   </div>
                   <div className="col-lg-6 p-t-20">
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select__fix-height txt-full-width">
                     <label
                         htmlFor="SelectBox3"
                         className="mdl-textfield__label"
@@ -152,29 +195,38 @@ export class AddForm extends Component {
                         Classes
                       </label>
                     <select id="class" onChange={this.handleChange} value={this.state.class}   className="mdl-textfield__input">
-                        <option value="khoa1">1</option>
-                        <option value="khoa2">2</option>
-                        <option value="khoa3">3</option>
+                       {this.RenderListClasses()}
                    </select>
                     </div>
                   </div>
                   <div className="col-lg-6 p-t-20">
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select__fix-height txt-full-width">
                     <label
                         htmlFor="SelectBox5"
                         className="mdl-textfield__label"
                       >
                         Subjects
                       </label>
-                    <select id="ID_SV_MH" onChange={this.handleChange} value={this.state.ID_SV_MH}   className="mdl-textfield__input">
-                        <option value="khoa1">1</option>
-                        <option value="khoa2">2</option>
-                        <option value="khoa3">3</option>
+                    <select id="subjects" onChange={this.handleChange} value={this.state.subjects}   className="mdl-textfield__input">
+                       {this.RenderListSubjects()}
                    </select>
                     </div>
                   </div>
                   <div className="col-lg-6 p-t-20">
-                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select__fix-height txt-full-width">
+                    <label
+                        htmlFor="SelectBox5"
+                        className="mdl-textfield__label"
+                      >
+                        Students
+                      </label>
+                    <select id="students" onChange={this.handleChange} value={this.state.students}   className="mdl-textfield__input">
+                       {this.RenderListStudents()}
+                   </select>
+                    </div>
+                  </div>
+                  <div className="col-lg-6 p-t-20">
+                    <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  getmdl-select__fix-height txt-full-width">
                     <label
                         htmlFor="SelectBox5"
                         className="mdl-textfield__label"
@@ -182,9 +234,7 @@ export class AddForm extends Component {
                         TypeCore
                       </label>
                     <select id="ID_Loaidiem" onChange={this.handleChange} value={this.state.ID_Loaidiem}   className="mdl-textfield__input">
-                        <option value="select">kt1</option>
-                        <option value="Java">kt2</option>
-                        <option value="C++">C++</option>
+                       {this.RenderListTypeScores()}
                    </select>
                     </div>
                   </div>
@@ -207,7 +257,6 @@ export class AddForm extends Component {
                         id="Ghichu"
                         value={this.state.Ghichu}
                         onChange={this.handleChange}
-                        defaultValue={""}
                       />
                       <label className="mdl-textfield__label" htmlFor="text7">
                         Education

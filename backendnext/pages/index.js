@@ -13,6 +13,8 @@ import { Router } from "next/router";
 
 export class Index extends Component {
   static async getInitialProps(ctx) {
+    
+
     return { header: 'List Staff',name : 'Thanh',List:"ListView" , Coookies : this.userCookies };
   }
   constructor(props) {
