@@ -24,15 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/staffs/addstaff": [
+    "/scores/addscores": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/staffs/addstaff.js"
+      "static/chunks/pages/scores/addscores.js"
     ],
-    "/staffs/staff": [
+    "/scores/score": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/staffs/staff.js"
+      "static/chunks/pages/scores/score.js"
     ]
   },
   "ampFirstPages": []

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {fetchPromised} from '../../../Request/imw_request'
 import AddForm from './AddForm'
+import AddStaff from '../../../pages/scores/addscores';
 
 export class Modal extends Component {
     constructor(props) {
@@ -39,7 +40,7 @@ export class Modal extends Component {
       {/* Modal content*/}
       <div className="modal-content">
         {/*them in here */}
-          <AddForm/>
+         <AddStaff/>
         </div>
     </div>
   </div>

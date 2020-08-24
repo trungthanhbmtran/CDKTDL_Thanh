@@ -10,8 +10,8 @@ class Footer extends  React.Component {
   render() {
     return (
         <div className="page-footer">
-        <div className="page-footer-inner"> 2017 © Smart University Theme By
-          <a href="mailto:redstartheme@gmail.com" target="_top" className="makerCss">Redstar Theme</a>
+        <div className="page-footer-inner"> 2020 © CDKTDL
+          <a href="mailto:trungthanhbmt.tran@gmail.com" target="_top" className="makerCss">ThanhTran</a>
         </div>
         <div className="scroll-to-top">
           <i className="icon-arrow-up" />

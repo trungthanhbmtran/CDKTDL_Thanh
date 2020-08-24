@@ -8,6 +8,7 @@ import {fnExcelReport} from '../../../Export/Excel'
 
 
 export class ContentStaff extends Component {
+  
   constructor(props) {
     super(props);
     this.state ={

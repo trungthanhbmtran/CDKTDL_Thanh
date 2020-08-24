@@ -3,6 +3,7 @@ import Index from '../index'
 import ContentStaff from '../../components/ContainerComponents/staff/ContentStaff'
 import {Send_Get_RestAPI} from '../../Request/imw_request'
 import LayoutPage from '../../components/ContainerComponents/LayoutContentPage/LayoutPage'
+import AddForm from '../../components/ContainerComponents/staff/AddForm'
 
 export class Staff extends Component {
     static async getInitialProps(ctx) {

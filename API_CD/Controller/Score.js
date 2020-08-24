@@ -118,28 +118,26 @@ router.get('/departments', async (req, res) => {
     }
 })
 
-router.post('/detailstaff', async (req, res) => {
+router.get('/studentscores', async (req, res) => {
     try {
         const pool = await poolPromise
         const result = await pool.request()
-        .query(`select * from HMR_Users where UserName='${req.body.username}' `, function (err, profileset) {
-            if (err) {
-                console.log(err)
-            }
-            else {
-                const send_data = profileset.recordset;
-                res.json(send_data);
-            }
-        })  
+            .query(`SELECT TOP 50 * FROM viewQLSV_Diem_Sinhvien`, function (err, profileset) {
+                if (err) {
+                    console.log(err)
+                }
+                else {
+                    var send_data = profileset.recordset;
+                    res.json(send_data);
+                }
+            })
     } catch (err) {
-        res.status(400).json({ message: "invalid" })
+        res.status(500)
         res.send(err.message)
     }
 })
 
-
-
-router.post('/add', async (req, res) => {
+router.post('/detailstaff', async (req, res) => {
     try {
         const pool = await poolPromise
         const result = await pool.request()
@@ -157,6 +155,28 @@ router.post('/add', async (req, res) => {
             })
     } catch (err) {
         res.status(400).json({ message: "invalid" })
+        res.send(err.message)
+    }
+})
+
+
+
+router.post('/add', async (req, res) => {
+    try {
+        const pool = await poolPromise
+        const result = await pool.request()
+            .query(`INSERT INTO QLSV_DM_DIEMSINHVIEN
+            VALUES (86670,1,2,3,null,null,null,null,1)`, function (err, profileset) {
+                if (err) {
+                    console.log(err)
+                }
+                else {
+                    var send_data = profileset.recordset;
+                    res.json(send_data);
+                }
+            })
+    } catch (err) {
+        res.status(500)
         res.send(err.message)
     }
 })
