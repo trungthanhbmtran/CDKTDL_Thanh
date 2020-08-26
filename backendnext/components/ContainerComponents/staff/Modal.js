@@ -40,7 +40,7 @@ export class Modal extends Component {
       {/* Modal content*/}
       <div className="modal-content">
         {/*them in here */}
-         <AddStaff/>
+        <p>This add staff</p>
         </div>
     </div>
   </div>

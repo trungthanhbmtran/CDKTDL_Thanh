@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router'
+import Link from 'next/Link';
 
 
 class SidebarMenu extends  React.Component {
@@ -24,7 +25,7 @@ class SidebarMenu extends  React.Component {
                   <img src="../assets/img/dp.jpg" className="img-circle user-img-circle" alt="User Image" />
                 </div>
                 <div className="pull-left info">
-                  <p> Kiran Patel</p>
+                  <p> Hello Thanh</p>
                   <a href="#"><i className="fa fa-circle user-online" /><span className="txtOnline">
                       Online</span></a>
                 </div>
@@ -33,24 +34,21 @@ class SidebarMenu extends  React.Component {
             <li className="nav-item start ">
               <a href="#" className="nav-link nav-toggle">
                 <i className="material-icons">dashboard</i>
-                <span className="title">Dashboard</span>
+                <span className="title">Scores</span>
                 <span className="arrow" />
               </a>
               <ul className="sub-menu">
                 <li className="nav-item   ">
-                  <a href="index.html" className="nav-link ">
-                    <span className="title">Dashboard 1</span>
+                  <Link href='/scores/score'>
+                  <a className="nav-link ">
+                    <span className="title">MainScores</span>
                   </a>
-                </li>
-                <li className="nav-item ">
-                  <a href="dashboard2.html" className="nav-link ">
-                    <span className="title">Dashboard 2</span>
+                  </Link>
+                  <Link href='/scores/addscores'>
+                  <a className="nav-link ">
+                    <span className="title">AddScores</span>
                   </a>
-                </li>
-                <li className="nav-item">
-                  <a href="dashboard3.html" className="nav-link ">
-                    <span className="title">Dashboard 3</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>

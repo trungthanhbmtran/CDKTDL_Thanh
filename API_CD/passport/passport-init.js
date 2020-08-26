@@ -1,4 +1,4 @@
-const conex = require('../conexion_bd/conex_mssql.js');
+const { poolPromise } = require('../Connection/db')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -14,24 +14,29 @@ module.exports = function () {
         done(null,username);
     });
     
-passport.use('login', new LocalStrategy({
-    passReqToCallback: true
-},
-    function (req, username, password, done) {
-
-        var _cParameters = [];
-        _cParameters.push({ name: 'usuario', type: 'VarChar', value: username });
-        _cParameters.push({ name: 'password', type: 'NVarChar', value: password });
-
-        conex.sp_recordset(conex.mssql_conect, 'dbo.sp_sis_loginR12', _cParameters, function (data) {
-            if (data[0].response == 1) {
-                return done(null, data[0].usuario);
-            }
-            else {
-                return done(null, false);
-            }
-        });
-
-    }
-    ));
-};
+    passport.use('login', new LocalStrategy({
+        passReqToCallback: true
+    },
+       async function (req, username, password, done) {
+        try {
+            const {username,password} = req.body
+            const pool = await poolPromise
+            const result = await pool.request()
+            .query(`select User_ID,UserName,Pass from HMR_Users where UserName='${username}' and Pass ='${password}' `, function (err, profileset) {
+                if (err) {
+                    return done(err)
+                    console.log(err)
+                }
+                else {
+                    const send_data = profileset.recordset;
+                    res.json(send_data);
+                    return done(null,send_data.UserName)
+                }
+            })  
+        } catch (err) {
+            res.status(400).json({ message: "invalid" })
+            res.send(err.message)
+        }
+        }
+        ));
+    };

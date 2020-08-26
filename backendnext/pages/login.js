@@ -14,7 +14,7 @@ export class login extends Component {
             <meta content="width=device-width, initial-scale=1" name="viewport" />
             <meta name="description" content="Responsive Admin Template" />
             <meta name="author" content="RedstarHospital" />
-            <title>Smart University | Bootstrap Responsive Admin Template</title>
+            <title>CDKTDL</title>
             <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />
             <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
             <link rel="stylesheet" href="../assets/plugins/iconic/css/material-design-iconic-font.min.css"/>

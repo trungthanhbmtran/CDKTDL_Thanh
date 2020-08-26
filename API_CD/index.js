@@ -1,14 +1,23 @@
-
 const _expressPackage = require("express");  
 //Initilize app with express web framework  
 const app = _expressPackage(); 
-const _bodyParserPackage = require("body-parser");  
+const _bodyParserPackage = require("body-parser"); 
+const passport = require('passport')
+const session = require("express-session"); 
 const cors = require("cors");
 const userRoute = require('./Controller/Users')
 const loginRoute = require('./Controller/Login')
 const staffRoute = require('./Controller/Staff')
 const scoreRoute = require('./controller/Score')
 const studentRoute = require('./controller/Student')
+const {passint}= require('./passport/passport-init')
+app.use(session({
+    secret: 'thatsecretthinggoeshere',
+    resave: false,
+    saveUninitialized: true
+}));
+app.use(passport.initialize())
+app.use(passport.session())
 //To parse result in json format  
 const cookieParser = require("cookie-parser");
 app.use(_bodyParserPackage.json()); 
@@ -28,6 +37,7 @@ app.use('/login',loginRoute);
 app.use('/staff',staffRoute);
 app.use('/score',scoreRoute);
 app.use('/student',studentRoute);
+
   
 //Lets set up our local server now.  
 const server = app.listen(process.env.PORT || 3001, function () {  
@@ -42,5 +52,3 @@ const server = app.listen(process.env.PORT || 3001, function () {
 
   
 //GET API  
-
-//cai 1 o dau vay

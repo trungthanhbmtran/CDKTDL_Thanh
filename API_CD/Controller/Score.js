@@ -166,13 +166,13 @@ router.post('/add', async (req, res) => {
         const pool = await poolPromise
         const result = await pool.request()
             .query(`INSERT INTO QLSV_DM_DIEMSINHVIEN
-            VALUES (86670,1,2,3,null,null,null,null,1)`, function (err, profileset) {
+            VALUES (${req.body.ID_SV_MH},2,3,9,null,null,null,null,1)`, function (err, profileset) {
                 if (err) {
                     console.log(err)
                 }
                 else {
                     var send_data = profileset.recordset;
-                    res.json(send_data);
+                    res.json('success');
                 }
             })
     } catch (err) {

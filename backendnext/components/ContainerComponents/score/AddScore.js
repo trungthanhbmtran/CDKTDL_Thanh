@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Send_Get_RestAPI,Send_Post_RestAPI } from "../../../Request/imw_request";
 import _ from 'lodash';
 
-export class AddScore_Component extends Component {
+export class MainScore extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,7 +51,6 @@ export class AddScore_Component extends Component {
     })
   }
   RenderListClasses() {
-    console.log(this.state.brench)
     return _.filter(this.props.results_classes, { 'ID_Nganhnghe' : parseInt(this.state.brench) }).map((value) =>  {
       const {ID_Lophoc,Ten_Lophoc} = value;
         return (
@@ -113,14 +112,13 @@ export class AddScore_Component extends Component {
     })
   }
 
-
-  
   async handleSubmit(event) {
     event.preventDefault();
-    const input ={"abc": "thanh"}
-    const res = await Send_Post_RestAPI("https://localhost:3001/scores/add",input)
-    const json =await res.json()
-    console.log(json)
+    console.log(this.state.ID_SV_MH)
+    let input ={"ID_SV_MH": this.state.ID_SV_MH,'ID_LoaiDiem' : 3,'Sodiem':5,'Ghichu':1}
+    let res = await Send_Post_RestAPI('http://localhost:3001/score/add',input)
+    let result =await res.json()
+    console.log(result)
   }
   render() {
     return (

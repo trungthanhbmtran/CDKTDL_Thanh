@@ -3,6 +3,7 @@ import TabPane from "./TabPane";
 import Navigator from "./Navigator";
 import AddScore_Component from "./AddScore";
 import {fnExcelReport} from '../../../Export/Excel'
+import {Send_Post_RestAPI} from '../../../Request/imw_request'
 
 
 export class MainScore extends Component {
@@ -52,7 +53,7 @@ export class MainScore extends Component {
         kt2,
       } = scores;
       return (
-        <tr key={MANHANVIEN}>
+        <tr key={ID_SV_MH}>
           <td>
             <a href="edit_professor.html" className="btn btn-primary btn-xs">
               <i className="fa fa-pencil" />
@@ -119,6 +120,7 @@ export class MainScore extends Component {
   }
   render() {
     return (
+        <>
           <div className="row">
             <div className="col-md-12">
               <div className="tabbable-line">
@@ -188,6 +190,7 @@ export class MainScore extends Component {
               </div>
             </div>
           </div>
+          </>
     );
   }
 }
