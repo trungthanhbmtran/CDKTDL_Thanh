@@ -12,7 +12,9 @@ export class MainScore extends Component {
     super(props);
     this.state ={
       loading:true,
-      data : this.props.results
+      data : this.props.results,
+      currentPage: 1,
+      newsPerPage: 3
     }
   }
   

@@ -22,6 +22,15 @@ class LoginComponent extends React.Component {
     let inputPost = {"username" : this.state.username , "password" : this.state.password}
      let res = await Send_Post_RestAPI('http://27.79.0.52:3001/login',inputPost)
      let data = await res.json();
+     console.log(data)
+     if(data === undefined || data === null){
+        alert('Error')
+        Router.push('/login')
+     }
+     else {
+      setCookie(this.state.username,data,1)
+      Router.push('/')
+     }
      //console.log(data)
       let {UserName,Pass,User_ID} = data[0];
         /*
@@ -33,12 +42,12 @@ class LoginComponent extends React.Component {
           console.log(UserName.length)
           console.log(this.state.username.length)
         */
-     if( this.state.username === UserName.replace(/\s/g,'') && this.state.password === Pass.replace(/\s/g,'')){
+     /*if( this.state.username === UserName.replace(/\s/g,'') && this.state.password === Pass.replace(/\s/g,'')){
       setCookie(`${this.state.username}`,"expires=Thu","01 Jan 1970 00:00:00 UTC")
        Router.push('/')
      }else{
        Router.push('/login')
-     }
+     }*/
   }
   render() {
     return (

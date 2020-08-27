@@ -116,7 +116,7 @@ export class MainScore extends Component {
     event.preventDefault();
     console.log(this.state.ID_SV_MH)
     let input ={"ID_SV_MH": this.state.ID_SV_MH,'ID_LoaiDiem' : 3,'Sodiem':5,'Ghichu':1}
-    let res = await Send_Post_RestAPI('http://localhost:3001/score/add',input)
+    let res = await Send_Post_RestAPI('http://27.79.0.52:3001/score/add',input)
     let result =await res.json()
     console.log(result)
   }

@@ -122,7 +122,8 @@ router.get('/studentscores', async (req, res) => {
     try {
         const pool = await poolPromise
         const result = await pool.request()
-            .query(`SELECT TOP 50 * FROM viewQLSV_Diem_Sinhvien`, function (err, profileset) {
+            .query(`/****** Script for SelectTopNRows command from SSMS  ******/
+            SELECT * FROM [ERP].[dbo].[viewQLSV_Diem_Sinhvien] where NHANVIEN_ID='15301002'`, function (err, profileset) {
                 if (err) {
                     console.log(err)
                 }

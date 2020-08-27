@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const { poolPromise } = require('../Connection/db')
-const  {generateToken} = require('../Auth/generateToken')
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+//import jwt from 'jsonwebtoken'; 
+dotenv.config(); 
 
 
 
@@ -16,7 +19,11 @@ router.post('/', async (req, res) => {
             }
             else {
                 const send_data = profileset.recordset;
-                res.json(send_data);
+                const token = jwt.sign({ id: send_data[0].id }, process.env.JWT_SECRET, {
+                    expiresIn: process.env.JWT_EXPIRES_IN,
+                })
+                console.log(token)
+                res.json(token);
             }
         })  
     } catch (err) {

@@ -10,7 +10,6 @@ const loginRoute = require('./Controller/Login')
 const staffRoute = require('./Controller/Staff')
 const scoreRoute = require('./controller/Score')
 const studentRoute = require('./controller/Student')
-const {passint}= require('./passport/passport-init')
 app.use(session({
     secret: 'thatsecretthinggoeshere',
     resave: false,
@@ -37,6 +36,8 @@ app.use('/login',loginRoute);
 app.use('/staff',staffRoute);
 app.use('/score',scoreRoute);
 app.use('/student',studentRoute);
+
+
 
   
 //Lets set up our local server now.  
