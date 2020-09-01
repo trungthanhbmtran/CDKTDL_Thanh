@@ -8,11 +8,21 @@ import _ from 'lodash';
 import Cookies from 'next-cookies'; 
 import { Router } from "next/router";
 import {getCookie,checkCookie} from '../Cookies/Cookies'
+import cookies from "next-cookies";
 
 
 
 
 export class Index extends Component {
+  static async getInitialProps(ctx) {
+    if(cookies === undefined)
+    {
+      redirect="/login"
+    }
+    return {
+      cookies: Cookies(ctx).name || ''
+    }
+  }
   constructor(props) {
     super(props);
     this.props.children
@@ -25,6 +35,7 @@ export class Index extends Component {
   }
   
   render() {
+    console.log(cookies)
     return (
       <>
         <Head>

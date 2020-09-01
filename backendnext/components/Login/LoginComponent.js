@@ -28,7 +28,7 @@ class LoginComponent extends React.Component {
         Router.push('/login')
      }
      else {
-      setCookie(this.state.username,data.token,1)
+      document.cookie = `name=${data.token}; path=/`;
       alert(`login success with ${this.state.username} `)
         Router.push('/')
      }
