@@ -4,28 +4,29 @@ import Header from "../components/Header";
 import QuickSetting from "../components/QuickSetting";
 import SidebarMenu from "../components/SidebarMenu";
 import Footer from "../components/Footer";
-import ContentStaff from '../components/ContainerComponents/staff/ContentStaff'
-import {setcookie,getCookie,checkCookie} from '../Cookies/Cookies'
+import _ from 'lodash';
+import Cookies from 'next-cookies'; 
 import { Router } from "next/router";
+import {getCookie,checkCookie} from '../Cookies/Cookies'
 
 
 
 
 export class Index extends Component {
-  
   constructor(props) {
     super(props);
     this.props.children
     this.state = {
       counters: "this is thanh",
       name: "thanh",
-      students: this.props.results
+      students: this.props.results,
+      check: props.cookies || ''
     };
   }
+  
   render() {
-    console.log(this.props.children);
     return (
-      <div>
+      <>
         <Head>
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -147,9 +148,8 @@ export class Index extends Component {
 
         <script src="../assets/plugins/apexcharts/apexcharts.min.js"></script>
         <script src="../assets/js/pages/chart/chartjs/home-data.js"></script>
-
       
-      </div>
+      </>
     );
   }
 }

@@ -3,7 +3,8 @@ import Index from '../index'
 import {Send_Get_RestAPI} from '../../Request/imw_request'
 import LayoutPage from '../../components/ContainerComponents/LayoutContentPage/LayoutPage'
 import AddScore_Component from '../../components/ContainerComponents/score/AddScore'
-
+import Cookies from 'next-cookies'
+import Router from 'next/router';
 export class addscores extends Component {
     static async getInitialProps(ctx) {
          const res_departments = await Send_Get_RestAPI("http://localhost:3001/score/departments");

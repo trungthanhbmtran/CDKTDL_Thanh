@@ -22,17 +22,18 @@ class LoginComponent extends React.Component {
     let inputPost = {"username" : this.state.username , "password" : this.state.password}
      let res = await Send_Post_RestAPI('http://27.79.0.52:3001/login',inputPost)
      let data = await res.json();
-     console.log(data)
-     if(data === undefined || data === null){
+     console.log(data.token)
+     if(data.token === undefined || data.token === null){
         alert('Error')
         Router.push('/login')
      }
      else {
-      setCookie(this.state.username,data,1)
-      Router.push('/')
+      setCookie(this.state.username,data.token,1)
+      alert(`login success with ${this.state.username} `)
+        Router.push('/')
      }
      //console.log(data)
-      let {UserName,Pass,User_ID} = data[0];
+     // let {UserName,Pass,User_ID} = data[0];
         /*
         console.log(UserName) 
           console.log(Pass)

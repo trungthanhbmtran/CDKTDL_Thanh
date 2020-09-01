@@ -3,19 +3,15 @@ const _expressPackage = require("express");
 const app = _expressPackage(); 
 const _bodyParserPackage = require("body-parser"); 
 const passport = require('passport')
-const session = require("express-session"); 
 const cors = require("cors");
 const userRoute = require('./Controller/Users')
 const loginRoute = require('./Controller/Login')
 const staffRoute = require('./Controller/Staff')
 const scoreRoute = require('./controller/Score')
 const studentRoute = require('./controller/Student')
-app.use(session({
-    secret: 'thatsecretthinggoeshere',
-    resave: false,
-    saveUninitialized: true
-}));
-app.use(passport.initialize())
+const session = require('./passport/passport');
+
+app.use(session.passport.initialize())
 app.use(passport.session())
 //To parse result in json format  
 const cookieParser = require("cookie-parser");
@@ -32,13 +28,21 @@ app.use(function (req, res, next) {
 });  
 //middware require router
 app.use('/users', userRoute);
-app.use('/login',loginRoute);
+app.use('/login',session.passport.authenticate('local', { failureRedirect: '/login' }), function(req, res) {
+	
+	req.token = session.generateToken(req.username);
+	res.json({
+		token: req.token,
+		user: req.username
+    });
+});
 app.use('/staff',staffRoute);
 app.use('/score',scoreRoute);
 app.use('/student',studentRoute);
 
-
-
+app.get('/me', session.check, function(req, res) {
+    res.json(req.username);
+  });
   
 //Lets set up our local server now.  
 const server = app.listen(process.env.PORT || 3001, function () {  

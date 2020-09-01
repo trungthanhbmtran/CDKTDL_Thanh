@@ -1,3 +1,5 @@
+const { Router } = require("next/router");
+
 module.exports = {
     setCookie: function(cname, cvalue, exdays){
         return new Promise((resove, reject)=>{
@@ -22,14 +24,14 @@ module.exports = {
                         return c.substring(name.length,c.length);
                     }
                 }
-                resove(ca);
+                resove(c);
           //reject('error');
        
       });
   },
   checkCookie: function () {
     return new Promise((resove, reject)=>{
-        var username=getCookie("username");
+        var username=getCookie("admin");
         if (username!="") {
             alert("Welcome again " + username);
         } else {

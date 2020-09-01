@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Send_Get_RestAPI,Send_Post_RestAPI } from "../../../Request/imw_request";
 import _ from 'lodash';
+import Router from 'next/router';
 
 export class MainScore extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ export class MainScore extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
   }
   handleChange(event) {
     this.setState({
@@ -115,10 +117,16 @@ export class MainScore extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     console.log(this.state.ID_SV_MH)
-    let input ={"ID_SV_MH": this.state.ID_SV_MH,'ID_LoaiDiem' : 3,'Sodiem':5,'Ghichu':1}
-    let res = await Send_Post_RestAPI('http://27.79.0.52:3001/score/add',input)
-    let result =await res.json()
-    console.log(result)
+    const input ={"ID_SV_MH": this.state.ID_SV_MH,'ID_LoaiDiem' : 3,'Sodiem':5,'Ghichu':1}
+    const res = await Send_Post_RestAPI('http://27.79.0.52:3001/score/add',input)
+    const result =await res.json()
+    alert(`Add Success with ${this.state.ID_SV_MH} and TypeScore is ${this.state.ID_Loaidiem}`)
+   /* console.log(result)*/
+  }
+
+  async handleCancel(event) {
+    event.isDefaultPrevented()
+    Router.push('/')
   }
   render() {
     return (
@@ -268,6 +276,8 @@ export class MainScore extends Component {
                     <button
                       type="button"
                       className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-default"
+                      data-dismiss="modal"
+                      onClick={this.handleCancel}
                     >
                       Cancel
                     </button>

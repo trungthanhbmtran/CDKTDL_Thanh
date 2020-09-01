@@ -32,11 +32,13 @@ class SidebarMenu extends  React.Component {
               </div>
             </li>
             <li className="nav-item start ">
-              <a href="#" className="nav-link nav-toggle">
+              <Link href='/scores/addscores'>
+              <a  className="nav-link nav-toggle">
                 <i className="material-icons">dashboard</i>
                 <span className="title">Scores</span>
                 <span className="arrow" />
               </a>
+              </Link>
               <ul className="sub-menu">
                 <li className="nav-item   ">
                   <Link href='/scores/score'>

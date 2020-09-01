@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router'
-
+import { useRouter, Router } from 'next/router'
+import Link from 'next/link'
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    
+    this.handleClick = this.handleClick.bind(this);
+  }
+  
+  async handleClick(event) {
+    event.preventDefault()
+    document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    console.log('test')
   }
   render() {
     return (
@@ -241,8 +247,10 @@ class Header extends React.Component {
                     </a>
                   </li>
                   <li>
-                    <a href="login.html">
+                    <Link href='/login' >
+                    <a onClick={this.handleSubmit} >
                       <i className="icon-logout" /> Log Out </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
