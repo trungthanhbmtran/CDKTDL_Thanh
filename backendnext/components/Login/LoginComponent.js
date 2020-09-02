@@ -87,6 +87,7 @@ class LoginComponent extends React.Component {
               <a className="txt1" href="forgot_password.html">
                 Forgot Password?
               </a>
+              <a href="/auth/google">Google</a>
             </div>
           </form>
         </div>

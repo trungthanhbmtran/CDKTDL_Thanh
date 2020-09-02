@@ -1,19 +1,13 @@
-const _sqlPackage = require("mssql");
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://localhost/imw_shop");
 
-const dbConfig = {
-    user: 'imw',
-    password: 'abcd1234@@huyfan91',
-    server: 'localhost',
-    database: 'ERP'
-}
+const userSchema = new mongoose.Schema({
+    uid: String,
+    email: String,
+    name: String,
+    picture: String
+});
 
-const poolPromise = new _sqlPackage.ConnectionPool(dbConfig)
-    .connect()
-    .then(pool => {
-        console.log('Connected to MSSQL')
-        return pool
-    })
-    .catch(err => console.log('Database Connection Failed! Bad Config: ', err))
-module.exports = {
-    _sqlPackage, poolPromise
-}  
+const user = mongoose.model('user', userSchema, 'users');
+module.exports = user;
