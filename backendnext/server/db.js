@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/imw_shop");
+mongoose.connect("mongodb://localhost/imw");
 
 const userSchema = new mongoose.Schema({
     uid: String,
     email: String,
+    password: String,
     name: String,
     picture: String
 });

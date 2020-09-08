@@ -1,7 +1,9 @@
 const express = require('express');
 const session = require('express-session');
+const bodyParser = require('body-parser')////////
 const connectMongodbSession = require('connect-mongodb-session');
 const passport = require('passport')
+const localStrategy = require('passport-local').Strategy;
 const facebookStrategy = require('passport-facebook').Strategy;
 const googleStrategy = require('passport-google-oauth20').Strategy;
 const jwt = require('jsonwebtoken');
@@ -12,7 +14,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const mongoStore = connectMongodbSession(session);
-const store = new mongoStore({uri: "mongodb://localhost/imw_shop", collection: 'sessions'});
+const imwSession = new mongoStore({uri: "mongodb://localhost/imw", collection: 'sessions'});
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -28,7 +30,7 @@ function ensureAuthenticatedLogin(req, res, next) {
     } else{
         return next();
     }
-  }
+}
 
 app.prepare()
 .then(() => {
@@ -46,12 +48,24 @@ app.prepare()
                 maxAge: oneMonth,
                 expires: new Date(Date.now() + oneMonth)
             },
-            store
+            imwSession
         })
     );
 
+    //////////////////////////
+    // parse application/x-www-form-urlencoded
+    server.use(bodyParser.urlencoded({ extended: false }));
+    //parse application/json
+    server.use(bodyParser.json());
+
     server.use(passport.initialize());
     server.use(passport.session());
+
+    server.post('/login', passport.authenticate('local', {
+        failureRedirect: '/login'
+    }), function(req, res) {
+        res.redirect('/');
+    });
 
     server.get('/auth/google', passport.authenticate('google', {
             scope: ['email', 'profile']
@@ -88,21 +102,38 @@ app.prepare()
 
     server.get("/", ensureAuthenticated);
     server.get("/login", ensureAuthenticatedLogin);
+    server.get("/staff/staffs", ensureAuthenticated);
+    server.get("/scores/addscores", ensureAuthenticated);
+    server.get("/scores/score", ensureAuthenticated);
+    server.get("/staff/addstaff", ensureAuthenticated);
 
     server.get('*', (req, res) => {
         return handle(req, res)
     })
     
-    server.listen(3001, (err) => {
+    server.listen(3002, (err) => {
         if (err) throw err
-        console.log('> Ready on http://localhost:3001')
+        console.log('> Ready on http://localhost:3002')
     });
+
+    passport.use(
+        new localStrategy(
+            function(username, password, done) {
+                db.findOne({ email: username, password: password }, function (err, user) {
+                    if (err) { return done(err); }
+                    if (!user) { return done(null, false); }
+                    //if (!user.verifyPassword(password)) { return done(null, false); }
+                    return done(null, user);
+                });
+            }
+        )
+    );
 
     passport.use(
         new googleStrategy({
             clientID: "26364853205-knvp9risf9lh4rbe1j05d7batlnllptp.apps.googleusercontent.com",
             clientSecret: "rexSEOJ2EukmdZFVroCs0-TB",
-            callbackURL: "http://localhost:3001/auth/google/callback",
+            callbackURL: "http://localhost:3002/auth/google/callback",
             accessType: 'offline'
         }, function (accessToken, refreshToken, profile, done) {
             //console.log(profile);
@@ -113,6 +144,7 @@ app.prepare()
                     uid: profile._json.sub,
                     name: profile._json.name,
                     email: profile._json.email,
+                    password: 'abc123@@',
                     picture: profile._json.picture
                 });
                 newUser.save((err) => {
@@ -126,7 +158,7 @@ app.prepare()
         new facebookStrategy({
             clientID: "611968872488736",
             clientSecret: "c1a4ef08e16aaaaf54a931fb45e80e18",
-            callbackURL: "http://localhost:3001/auth/facebook/callback",
+            callbackURL: "http://localhost:3002/auth/facebook/callback",
             profileFields: ['id', 'displayName', 'email', 'photos']
         }, function (accessToken, refreshToken, profile, done) {
             console.log(profile);
@@ -137,6 +169,7 @@ app.prepare()
                     uid: profile._json.sub,
                     name: profile._json.name,
                     email: profile._json.email,
+                    password: 'abc123@@',
                     picture: profile._json.picture
                 });
                 newUser.save((err) => {

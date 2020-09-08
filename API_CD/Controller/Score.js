@@ -103,7 +103,7 @@ router.get('/departments', async (req, res) => {
     try {
         const pool = await poolPromise
         const result = await pool.request()
-            .query(`select ID_Donvi,TENDONVI from HMR_DONVI `, function (err, profileset) {
+            .query(`select ID_Donvi,TENDONVI from HMR_DONVI  where MADONVI in(02,03,04,05,06)`, function (err, profileset) {
                 if (err) {
                     console.log(err)
                 }

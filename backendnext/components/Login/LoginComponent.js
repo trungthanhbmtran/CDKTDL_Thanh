@@ -19,8 +19,8 @@ class LoginComponent extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    let inputPost = {"username" : this.state.username , "password" : this.state.password}
-     let res = await Send_Post_RestAPI('http://27.79.0.52:3001/login',inputPost)
+    let input ={"username" : this.state.username,"password" : this.state.password}
+     let res = await Send_Post_RestAPI('http://localhost:3002/logintest',input)
      let data = await res.json();
      console.log(data.token)
      if(data.token === undefined || data.token === null){
@@ -55,7 +55,7 @@ class LoginComponent extends React.Component {
       <div className="limiter">
       <div className="container-login100 page-background">
         <div className="wrap-login100">
-          <form className="login100-form validate-form" onSubmit={this.handleSubmit}>
+          <form name="submitlogin" className="login100-form validate-form" method="POST" action="/login">
             <span className="login100-form-logo">
               <img alt="" src="../assets/img/logo-2.png" />
             </span>
@@ -63,12 +63,12 @@ class LoginComponent extends React.Component {
               Log in
             </span>
             <div className="wrap-input100 validate-input" data-validate="Enter username">
-              <input className="input100" type="text" name="username" placeholder="Username" value={this.state.username}
+              <input className="input100" type="text" id="username" name="username" placeholder="Username" value={this.state.username}
               onChange={this.handleChange} required/>
               <span className="focus-input100" data-placeholder="" />
             </div>
             <div className="wrap-input100 validate-input" data-validate="Enter password" >
-              <input className="input100" type="password" name="password" placeholder="Password" value={this.state.password}
+              <input className="input100" type="password" id="password" name="password" placeholder="Password" value={this.state.password}
               onChange={this.handleChange} required/>
               <span className="focus-input100" data-placeholder="" />
             </div>
@@ -82,12 +82,13 @@ class LoginComponent extends React.Component {
               <button className="login100-form-btn" >
                 Login
               </button>
+              <a className="login100-form-btn"  href="/auth/google">Google</a>
+              <a className="login100-form-btn"  href="/auth/facebook">Facebook</a>
             </div>
             <div className="text-center p-t-30">
               <a className="txt1" href="forgot_password.html">
                 Forgot Password?
               </a>
-              <a href="/auth/google">Google</a>
             </div>
           </form>
         </div>
