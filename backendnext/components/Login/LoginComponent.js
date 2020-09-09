@@ -82,9 +82,7 @@ class LoginComponent extends React.Component {
               <button className="login100-form-btn" >
                 Login
               </button>
-              <a className="login100-form-btn"  href="/auth/google">Google</a>
-              <a className="login100-form-btn"  href="/auth/facebook">Facebook</a>
-            </div>
+             </div>
             <div className="text-center p-t-30">
               <a className="txt1" href="forgot_password.html">
                 Forgot Password?

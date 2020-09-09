@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useRouter, Router } from 'next/router'
+import Router from 'next/router'
 import Link from 'next/link'
 
 class Header extends React.Component {
@@ -11,6 +11,7 @@ class Header extends React.Component {
   async handleClick(event) {
     event.preventDefault()
     document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    Router.push('/login')
     console.log('test')
   }
   render() {
@@ -248,7 +249,7 @@ class Header extends React.Component {
                   </li>
                   <li>
                     <Link href='/login' >
-                    <a onClick={this.handleSubmit} >
+                    <a onClick={this.handleClick}>
                       <i className="icon-logout" /> Log Out </a>
                     </Link>
                   </li>

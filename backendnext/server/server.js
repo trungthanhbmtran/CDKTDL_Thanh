@@ -8,6 +8,7 @@ const facebookStrategy = require('passport-facebook').Strategy;
 const googleStrategy = require('passport-google-oauth20').Strategy;
 const jwt = require('jsonwebtoken');
 const db = require('./db.js');
+const {poolPromise} = require('./db_sql');
 
 const next = require('next');
 const dev = process.env.NODE_ENV !== 'production';
@@ -64,7 +65,17 @@ app.prepare()
     server.post('/login', passport.authenticate('local', {
         failureRedirect: '/login'
     }), function(req, res) {
-        res.redirect('/');
+        jwt.sign({_id: req.user.uid, email: req.user.email}, 'abc123@@xyz789', { expiresIn: '30 days' }, (err, accessToken) => {
+            res.cookie('accessToken', accessToken, { maxAge: oneMonth });// httpOnly: true
+            res.cookie('name', req.user.name, { maxAge: oneMonth });// httpOnly: true
+            res.cookie('email', req.user.email, { maxAge: oneMonth });// httpOnly: true
+
+            // var store_id = req.cookies.store_id;
+            // if (store_id === undefined && req.baseUrl != '/stores') {
+            //   res.redirect('/stores');
+            // }
+            res.redirect('/');
+        });
     });
 
     server.get('/auth/google', passport.authenticate('google', {
@@ -118,13 +129,21 @@ app.prepare()
 
     passport.use(
         new localStrategy(
-            function(username, password, done) {
-                db.findOne({ email: username, password: password }, function (err, user) {
-                    if (err) { return done(err); }
-                    if (!user) { return done(null, false); }
+            async function(username, password, done) {
+               // db.findOne({ email: username, password: password }, function (err, user) {
+              //      if (err) { return done(err); }
+            //        if (!user) { return done(null, false); }
                     //if (!user.verifyPassword(password)) { return done(null, false); }
+                //    return done(null, user);
+              //  });
+              const pool = await poolPromise
+              const result = await pool.request()
+              .query(`select * from HMR_Users where UserName='${username}' and Pass ='${password}' `, function (err, user) {
+                if (err) { return done(err); }
+                    if (!user) { return done(null, false); }
+                        //if (!user.verifyPassword(password)) { return done(null, false); }
                     return done(null, user);
-                });
+              })  
             }
         )
     );
@@ -181,14 +200,20 @@ app.prepare()
 
     passport.serializeUser(function (user, done) {
         //Lấy được từ googleStrategy
-        done(null, user.uid);
+        console.log(user.recordset[0].User_ID);
+        done(null, user.recordset[0].User_ID);
     });
 
-    passport.deserializeUser(function (uid, done) {
+    passport.deserializeUser(async function (User_ID, done) {
         //Lấy được từ serializeUser
-        db.findOne({uid: uid}, (err, user) =>{
-            done(null, user);
-        });
+      //  db.findOne({uid: uid}, (err, user) =>{
+        //    done(null, user);
+        //});
+        const pool = await poolPromise
+        const result = await pool.request()
+        .query(`select UserName from HMR_Users where User_ID='${User_ID}' `, (err, user) =>{
+            done(null, user.recordset[0].UserName);
+        })  
     });
 
 })

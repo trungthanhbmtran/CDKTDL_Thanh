@@ -45,7 +45,7 @@ app.get('/me', session.check, function(req, res) {
   });
   
 //Lets set up our local server now.  
-const server = app.listen(process.env.PORT || 3001, function () {  
+const server = app.listen(process.env.PORT || 3001,'0.0.0.0',function () {  
     const port = server.address().port;  
     console.log("App now running on port", port);  
 });  

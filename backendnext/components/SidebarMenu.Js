@@ -26,12 +26,12 @@ class SidebarMenu extends  React.Component {
                 </div>
                 <div className="pull-left info">
                   <p> Hello Thanh</p>
-                  <a href="#"><i className="fa fa-circle user-online" /><span className="txtOnline">
+                  <a href=""><i className="fa fa-circle user-online" /><span className="txtOnline">
                       Online</span></a>
                 </div>
               </div>
             </li>
-            <li className="nav-item start ">
+            <li className="nav-item start " className="nav-item active open">
               <Link href='/scores/addscores'>
               <a  className="nav-link nav-toggle">
                 <i className="material-icons">dashboard</i>
@@ -40,13 +40,13 @@ class SidebarMenu extends  React.Component {
               </a>
               </Link>
               <ul className="sub-menu">
-                <li className="nav-item   ">
-                  <Link href='/scores/score'>
+                <li className="nav-item">
+                  <Link prefetch href='/scores/score'>
                   <a className="nav-link ">
                     <span className="title">MainScores</span>
                   </a>
                   </Link>
-                  <Link href='/scores/addscores'>
+                  <Link prefetch href='/scores/addscores'>
                   <a className="nav-link ">
                     <span className="title">AddScores</span>
                   </a>
@@ -60,7 +60,7 @@ class SidebarMenu extends  React.Component {
               </a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link nav-toggle"> <i className="material-icons">person</i>
+              <a href="" className="nav-link nav-toggle"> <i className="material-icons">person</i>
                 <span className="title">Professors</span> <span className="arrow" />
               </a>
               <ul className="sub-menu">
@@ -90,8 +90,8 @@ class SidebarMenu extends  React.Component {
                 </li>
               </ul>
             </li>
-            <li className="nav-item active open">
-              <a href="#" className="nav-link nav-toggle"><i className="material-icons">group</i>
+            <li className="nav-item">
+              <a href="" className="nav-link nav-toggle"><i className="material-icons">group</i>
                 <span className="title">Students</span><span className="selected" />
                 <span className="arrow open" />
               </a>
@@ -125,7 +125,7 @@ class SidebarMenu extends  React.Component {
               </ul>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link nav-toggle"> <i className="material-icons">school</i>
+              <a href="" className="nav-link nav-toggle"> <i className="material-icons">school</i>
                 <span className="title">Courses</span> <span className="arrow" />
                 <span className="label label-rouded label-menu label-success">new</span>
               </a>
@@ -158,7 +158,7 @@ class SidebarMenu extends  React.Component {
               </ul>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link nav-toggle"> <i className="material-icons">local_library</i>
+              <a href="" className="nav-link nav-toggle"> <i className="material-icons">local_library</i>
                 <span className="title">Library</span> <span className="arrow" />
               </a>
               <ul className="sub-menu">
@@ -185,7 +185,7 @@ class SidebarMenu extends  React.Component {
               </ul>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link nav-toggle"> <i className="material-icons">business</i>
+              <a href="" className="nav-link nav-toggle"> <i className="material-icons">business</i>
                 <span className="title">Departments</span> <span className="arrow" />
               </a>
               <ul className="sub-menu">
@@ -211,14 +211,16 @@ class SidebarMenu extends  React.Component {
               </ul>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link nav-toggle"> <i className="material-icons">face</i>
+              <a href="" className="nav-link nav-toggle"> <i className="material-icons">face</i>
                 <span className="title">Staff</span> <span className="arrow" />
               </a>
               <ul className="sub-menu">
                 <li className="nav-item">
-                  <a href="all_staffs.html" className="nav-link "> <span className="title">All
+                  <Link href="/staffs/staff">
+                  <a  className="nav-link "> <span className="title">All
                       Staff</span>
                   </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a href="add_staff.html" className="nav-link "> <span className="title">Add Staff</span>
@@ -242,7 +244,7 @@ class SidebarMenu extends  React.Component {
               </ul>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link nav-toggle"> <i className="material-icons">airline_seat_individual_suite</i>
+              <a href="" className="nav-link nav-toggle"> <i className="material-icons">airline_seat_individual_suite</i>
                 <span className="title">Holiday</span> <span className="arrow" />
               </a>
               <ul className="sub-menu">
@@ -274,7 +276,7 @@ class SidebarMenu extends  React.Component {
               </ul>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link nav-toggle">
+              <a href="" className="nav-link nav-toggle">
                 <i className="material-icons">email</i>
                 <span className="title">Email</span>
                 <span className="arrow" />
@@ -299,7 +301,7 @@ class SidebarMenu extends  React.Component {
               </ul>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link nav-toggle"> <i className="material-icons">monetization_on</i>
+              <a href="" className="nav-link nav-toggle"> <i className="material-icons">monetization_on</i>
                 <span className="title">Fees</span> <span className="arrow" />
               </a>
               <ul className="sub-menu">
@@ -330,7 +332,7 @@ class SidebarMenu extends  React.Component {
               </a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link nav-toggle">
+              <a href="" className="nav-link nav-toggle">
                 <i className="material-icons">dvr</i>
                 <span className="title">UI Elements</span>
                 <span className="label label-rouded label-menu label-warning">new</span>
@@ -395,7 +397,7 @@ class SidebarMenu extends  React.Component {
               </ul>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link nav-toggle">
+              <a href="" className="nav-link nav-toggle">
                 <i className="material-icons">store</i>
                 <span className="title">Material Elements</span>
                 <span className="arrow" />
@@ -600,52 +602,6 @@ class SidebarMenu extends  React.Component {
               </ul>
             </li>
             <li className="nav-item">
-              <a href="javascript:;" className="nav-link nav-toggle"> <i className="material-icons">description</i>
-                <span className="title">Extra pages</span>
-                <span className="arrow" />
-              </a>
-              <ul className="sub-menu">
-                <li className="nav-item  ">
-                  <a href="login.html" className="nav-link "> <span className="title">Login</span>
-                  </a>
-                </li>
-                <li className="nav-item  ">
-                  <a href="sign_up.html" className="nav-link "> <span className="title">Sign Up</span>
-                  </a>
-                </li>
-                <li className="nav-item  ">
-                  <a href="forgot_password.html" className="nav-link "> <span className="title">Forgot
-                      Password</span>
-                  </a>
-                </li>
-                <li className="nav-item"><a href="user_profile.html" className="nav-link "><span className="title">Profile</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="contact.html" className="nav-link "> <span className="title">Contact Us</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="lock_screen.html" className="nav-link "> <span className="title">Lock
-                      Screen</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="page-404.html" className="nav-link "> <span className="title">404 Page</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="page-500.html" className="nav-link "> <span className="title">500 Page</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="blank_page.html" className="nav-link "> <span className="title">Blank
-                      Page</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item">
               <a href="javascript:;" className="nav-link nav-toggle">
                 <i className="material-icons">slideshow</i>
                 <span className="title">Multi Level Menu</span>
@@ -669,25 +625,25 @@ class SidebarMenu extends  React.Component {
                             <i className="fa fa-calculator" /> Sample Link 1</a>
                         </li>
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
+                          <a href="" className="nav-link">
                             <i className="fa fa-clone" /> Sample Link 2</a>
                         </li>
                         <li className="nav-item">
-                          <a href="#" className="nav-link">
+                          <a href="" className="nav-link">
                             <i className="fa fa-cogs" /> Sample Link 3</a>
                         </li>
                       </ul>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <a href="" className="nav-link">
                         <i className="fa fa-file-pdf-o" /> Sample Link 1</a>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <a href="" className="nav-link">
                         <i className="fa fa-rss" /> Sample Link 2</a>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <a href="" className="nav-link">
                         <i className="fa fa-hdd-o" /> Sample Link 3</a>
                     </li>
                   </ul>
@@ -699,22 +655,22 @@ class SidebarMenu extends  React.Component {
                   </a>
                   <ul className="sub-menu">
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <a href="" className="nav-link">
                         <i className="fa fa-paper-plane" /> Sample Link 1</a>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <a href="" className="nav-link">
                         <i className="fa fa-power-off" /> Sample Link 1</a>
                     </li>
                     <li className="nav-item">
-                      <a href="#" className="nav-link">
+                      <a href="" className="nav-link">
                         <i className="fa fa-recycle" /> Sample Link 1
                       </a>
                     </li>
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a href="#" className="nav-link">
+                  <a href="" className="nav-link">
                     <i className="fa fa-volume-up" /> Item 3 </a>
                 </li>
               </ul>

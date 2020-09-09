@@ -6,7 +6,7 @@ import AddForm from '../../components/ContainerComponents/staff/AddForm'
 
 export class AddStaff extends Component {
     static async getInitialProps(ctx) {
-         let res_departments = await Send_Get_RestAPI("http://localhost:3001/score/departments");
+         let res_departments = await Send_Get_RestAPI(`http://${process.env.HOST}:3001/score/departments`);
          let results_departments = await res_departments.json();
          let res_brenches = await Send_Get_RestAPI("http://localhost:3001/score/brenches");
          let results_brenches = await res_brenches.json();
