@@ -118,7 +118,7 @@ export class MainScore extends Component {
     event.preventDefault();
     console.log(this.state.ID_SV_MH)
     const input ={"ID_SV_MH": this.state.ID_SV_MH,'ID_LoaiDiem' : 3,'Sodiem':5,'Ghichu':1}
-    const res = await Send_Post_RestAPI(`http://${process.env.HOST}:3001/score/add`,input)
+    const res = await Send_Post_RestAPI(`http://${process.env.HOSTPRE}:3001/score/add`,input)
     const result =await res.json()
     alert(`Add Success with ${this.state.ID_SV_MH} and TypeScore is ${this.state.ID_Loaidiem}`)
    /* console.log(result)*/

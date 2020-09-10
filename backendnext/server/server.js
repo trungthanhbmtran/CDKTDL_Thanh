@@ -65,16 +65,17 @@ app.prepare()
     server.post('/login', passport.authenticate('local', {
         failureRedirect: '/login'
     }), function(req, res) {
-        jwt.sign({_id: req.user.uid, email: req.user.email}, 'abc123@@xyz789', { expiresIn: '30 days' }, (err, accessToken) => {
+       // console.log(req.session.passport.user)
+        //console.log(req.body.username)
+        jwt.sign({_id: req.session.passport.user, email: req.body.username}, 'abc123@@xyz789', { expiresIn: '30 days' }, (err, accessToken) => {
             res.cookie('accessToken', accessToken, { maxAge: oneMonth });// httpOnly: true
-            res.cookie('name', req.user.name, { maxAge: oneMonth });// httpOnly: true
-            res.cookie('email', req.user.email, { maxAge: oneMonth });// httpOnly: true
+            res.cookie('name', req.body.username, { maxAge: oneMonth });// httpOnly: true
 
             // var store_id = req.cookies.store_id;
             // if (store_id === undefined && req.baseUrl != '/stores') {
             //   res.redirect('/stores');
             // }
-            res.redirect('/');
+           res.redirect('/');
         });
     });
 
@@ -200,7 +201,6 @@ app.prepare()
 
     passport.serializeUser(function (user, done) {
         //Lấy được từ googleStrategy
-        console.log(user.recordset[0].User_ID);
         done(null, user.recordset[0].User_ID);
     });
 

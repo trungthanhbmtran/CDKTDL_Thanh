@@ -20,14 +20,14 @@ export class addscores extends Component {
         const res_typescores =  await Send_Get_RestAPI(`http://${process.env.HOST}:3001/score/typescores`);
         const results_typescores = await res_typescores.json();
      return {results_departments : results_departments,results_brenches: results_brenches ,results_classes: results_classes,
-       results_subjects :results_subjects,results_students :results_students,results_typescores:results_typescores, header: 'List Staff',name:"thanh"};
+       results_subjects :results_subjects,results_students :results_students,results_typescores:results_typescores, cookies: Cookies(ctx) || {}};
       }
     constructor(props) {
         super(props)
     }
     render(){
         return (
-            <Index>
+            <Index {...this.props}>
                 <LayoutPage {...this.props}>
                         <AddScore_Component {...this.props}/>
                  </LayoutPage>

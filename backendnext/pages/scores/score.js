@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Index from "../index";
 import {Send_Get_RestAPI} from '../../Request/imw_request'
 import MainScore from "../../components/ContainerComponents/score/MainScore";
+import Cookies from 'next-cookies'
 
 export class score extends Component {
     static async getInitialProps(ctx) {
@@ -20,13 +21,13 @@ export class score extends Component {
         const res = await Send_Get_RestAPI(`http://${process.env.HOST}:3001/score/studentscores`)
         const json = await res.json();
     return {results_departments : results_departments,results_brenches: results_brenches ,results_classes: results_classes,
-      results_subjects :results_subjects,results_students :results_students,results_typescores:results_typescores, results:json, header: 'List Staff',name:"thanh"};
+      results_subjects :results_subjects,results_students :results_students,results_typescores:results_typescores, results:json,  cookies: Cookies(ctx) || {}};
      }
     render() {
         console.log(this.props.children);
         console.log(this.props)
         return (
-            <Index>
+            <Index {...this.props}>
                 <div className="page-content-wrapper">
                     <div className="page-content">
                         <div className="page-bar">

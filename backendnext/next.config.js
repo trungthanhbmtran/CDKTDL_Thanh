@@ -1,5 +1,6 @@
 module.exports = {
     env: {
-        HOST: 'localhost' 
+        HOST: 'localhost' ,
+        HOSTPRE : '27.79.0.52',
     },
   }

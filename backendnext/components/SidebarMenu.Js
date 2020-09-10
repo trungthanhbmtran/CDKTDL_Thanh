@@ -6,7 +6,6 @@ import Link from 'next/Link';
 class SidebarMenu extends  React.Component {
   constructor(props) {
     super(props);
-    
   }
   render() {
     return (
@@ -25,7 +24,7 @@ class SidebarMenu extends  React.Component {
                   <img src="../assets/img/dp.jpg" className="img-circle user-img-circle" alt="User Image" />
                 </div>
                 <div className="pull-left info">
-                  <p> Hello Thanh</p>
+    <p> Hello Thanh</p>
                   <a href=""><i className="fa fa-circle user-online" /><span className="txtOnline">
                       Online</span></a>
                 </div>
@@ -41,12 +40,12 @@ class SidebarMenu extends  React.Component {
               </Link>
               <ul className="sub-menu">
                 <li className="nav-item">
-                  <Link prefetch href='/scores/score'>
+                  <Link prefetch={true} href='/scores/score'>
                   <a className="nav-link ">
                     <span className="title">MainScores</span>
                   </a>
                   </Link>
-                  <Link prefetch href='/scores/addscores'>
+                  <Link prefetch={true} href='/scores/addscores'>
                   <a className="nav-link ">
                     <span className="title">AddScores</span>
                   </a>

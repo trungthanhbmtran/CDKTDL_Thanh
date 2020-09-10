@@ -15,10 +15,6 @@ import cookies from "next-cookies";
 
 export class Index extends Component {
   static async getInitialProps(ctx) {
-    if(cookies === undefined)
-    {
-      redirect="/login"
-    }
     return {
       cookies: Cookies(ctx).name || ''
     }
@@ -128,7 +124,7 @@ export class Index extends Component {
           <Header />
           <QuickSetting />
           <div className="page-container">
-            <SidebarMenu />
+            <SidebarMenu {...this.props}/>
            {this.props.children}
           </div>
           <Footer />
