@@ -169,6 +169,7 @@ router.post('/detailstaff', async (req, res) => {
 
 
 router.post('/add', async (req, res) => {
+    console.log('day la them')
     console.log(req.body)
    // console.log(req,body.ID_SV_MH)
     //console.log(req.body.ID_LoaiDiem)
@@ -176,21 +177,21 @@ router.post('/add', async (req, res) => {
     //console.log(req.body.Ghichu)
     try {
         let _time = new Date().toISOString();
-        console.log(_time)
+      //  console.log(_time)
         const pool = await poolPromise
         const result = await pool.request()
             .query(`select count(*)as a from QLSV_DM_DIEMSINHVIEN where ID_SV_MH=${req.body.ID_SV_MH} AND ID_LOAIDIEM=${req.body.ID_LoaiDiem}`, async function(err,profileset){
-                console.log(profileset.recordset[0].a)
+               // console.log(profileset.recordset[0].a)
                 if(profileset.recordset[0].a !==0){
                  res.json(`Error :${req.body.ID_SV_MH} and ${req.body.ID_LoaiDiem} da duoc nhap truoc do`)
-                  console.log(err)
+                  //console.log(err)
                 }
                 else{
                     const resultcheck = await pool.request()
                     .query(`INSERT INTO QLSV_DM_DIEMSINHVIEN
                     VALUES (${req.body.ID_SV_MH},${req.body.ID_LoaiDiem},${req.body.Sodiem},'${req.body.Ghichu}','${_time}',null,null,null,0)`, function (err, profileset) {
                         if (err) {
-                            console.log(err)
+                    //        console.log(err)
                         }
                         else {
                             const send_data = profileset.recordset;
